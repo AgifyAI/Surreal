@@ -1,0 +1,92 @@
+# -----------------------------------
+# Environment
+# -----------------------------------
+.env
+.env.local
+
+# -----------------------------------
+# Python
+# -----------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+.venv
+
+# -----------------------------------
+# IDE
+# -----------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# -----------------------------------
+# Data & Logs
+# -----------------------------------
+data/
+*.db
+*.sqlite
+*.log
+logs/
+
+# -----------------------------------
+# OS
+# -----------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+Thumbs.db
+
+# -----------------------------------
+# Exclude SurrealDB source files
+# -----------------------------------
+/crates/
+/target/
+/lib/
+/tests/
+/dev/
+/pkg/
+/profiling/
+/supply-chain/
+/doc/
+/.github/
+Cargo.toml
+Cargo.lock
+rust-toolchain.toml
+rustfmt.toml
+*.rs
+/scripts/
+*.md
+!README_RAG.md
+!plan.md
+!context.md
+
