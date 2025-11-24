@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    command: start --log trace --user root --pass root memory
+    ports:
+      - "8001:8000"
+    volumes:
+      - surreal_data:/data
+    environment:
+      - SURREAL_USER=root
+      - SURREAL_PASS=root
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SURREALDB_URL=http://surrealdb:8000
+      - SURREALDB_USER=root
+      - SURREALDB_PASSWORD=root
+      - SURREALDB_NAMESPACE=Law IA
+      - SURREALDB_DATABASE=mailify
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_MODEL=text-embedding-3-large
+      - EMBEDDING_DIMENSION=1536
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+    depends_on:
+      surrealdb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  surreal_data:
